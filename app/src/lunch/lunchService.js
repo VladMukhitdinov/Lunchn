@@ -35,7 +35,7 @@
         return $q.when(lunches);
       },
       getLunch : function(lunchId){
-        return $q.when(lunches);
+        return $q.when(_.find(lunches, {id: lunchId}));
       }
     };
   }
