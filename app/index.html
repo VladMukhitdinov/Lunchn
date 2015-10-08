@@ -40,9 +40,12 @@
     <script src="./src/login/loginController.js"></script>
     <script src="./src/login/loginService.js"></script>
 
+    <script src="./src/home/home.js"></script>
+    <script src="./src/home/homeController.js"></script>
+
     <script type="text/javascript">
           angular
-              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login'])
+              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login', 'home'])
               .config(function($mdThemingProvider, $mdIconProvider, $urlRouterProvider){
                   $mdIconProvider
                       .defaultIconSet("./assets/svg/avatars.svg", 128)
