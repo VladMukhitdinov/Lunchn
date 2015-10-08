@@ -17,7 +17,7 @@
     }
 
     function find(){
-      $state.go('find-lunch');
+      $state.go('find');
     }
 
   }

@@ -46,10 +46,15 @@
 
     <script src="./src/create-lunch/create.js"></script>
     <script src="./src/create-lunch/createController.js"></script>
+    <script src="./src/create-lunch/createService.js"></script>
+
+    <script src="./src/find-lunch/find.js"></script>
+    <script src="./src/find-lunch/findController.js"></script>
+    <script src="./src/find-lunch/findService.js"></script>
 
     <script type="text/javascript">
           angular
-              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login', 'home', 'create'])
+              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login', 'home', 'create', 'find'])
               .config(function($mdThemingProvider, $mdIconProvider, $urlRouterProvider){
                   $mdIconProvider
                       .defaultIconSet("./assets/svg/avatars.svg", 128)
