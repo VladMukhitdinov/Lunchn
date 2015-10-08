@@ -1,3 +1,19 @@
 <div id="login-page" ng-controller="CreateController as ctrl">
-  Find lunch
+  <img src="/assets/img/logo-sm.png" />
+  <br/>
+  <h1>Find a lunch</h1>
+  <md-input-container>
+      <label>Venue</label>
+      <input ng-model="lunch.venue">
+    </md-input-container>
+
+    <md-input-container style="width:65%">
+      <label>Date</label>
+      <input ng-model="lunch.date">
+    </md-input-container>
+
+    <md-input-container style="width:30%">
+      <label>Time</label>
+      <input ng-model="lunch.time">
+    </md-input-container>
 </div>
