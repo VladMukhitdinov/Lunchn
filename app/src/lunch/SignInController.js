@@ -15,13 +15,12 @@
    * @constructor
    */
   function SignInController( signInService, $mdSidenav, $mdBottomSheet, $log, $q) {
+    debugger;
     var self = this;
 
     self.selected     = null;
     self.users        = [ ];
-    self.selectUser   = selectUser;
-    self.toggleList   = toggleUsersList;
-    self.showContactOptions  = showContactOptions;
+    self.login   = signIn;
 
     // *********************************
     // Internal methods

@@ -1,11 +1,10 @@
 (function(){
   'use strict';
-
   angular.module('login')
-         .service('loginService', ['$q', LoginService]);
+         .service('LoginService', ['$q', LoginService]);
 
   function LoginService($q){
-
+debugger;
 
     // Promise-based API
     return {

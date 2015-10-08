@@ -41,11 +41,10 @@
     <script src="./src/login/loginService.js"></script>
 
     <script type="text/javascript">
-
           angular
-              .module('lunchnApp', ['ngMaterial', 'ui.router', 'signIn'])
+              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login'])
               .config(function($mdThemingProvider, $mdIconProvider, $urlRouterProvider){
-
+debugger;
                   $mdIconProvider
                       .defaultIconSet("./assets/svg/avatars.svg", 128)
                       .icon("menu"       , "./assets/svg/menu.svg"        , 24)
@@ -59,7 +58,7 @@
                           .primaryPalette('blue-grey')
                           .accentPalette('lime');
 
-                      $urlRouterProvider.otherwise("/sign-in");
+                      $urlRouterProvider.otherwise("/login");
               });
 
     </script>
