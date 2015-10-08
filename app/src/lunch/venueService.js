@@ -2,11 +2,11 @@
   'use strict';
 
   angular.module('lunchApp')
-         .service('lunchService', ['$q', LunchService]);
+         .service('venueService', ['$q', LunchService]);
 
   function LunchService($q){
 
-    var lunches = [
+    var venues = [
       {id: 1, venue: 'Subway', date: '12/10/2015', creator: 'Marcus'},
       {id: 2, venue: 'McDonald\'s', date: '12/10/2015', creator: 'Ben'},
       {id: 3, venue: 'The Cook', date: '13/10/2015', creator: 'Mike'},
@@ -32,10 +32,10 @@
     // Promise-based API
     return {
       getRecentLunches : function() {
-        return $q.when(lunches);
+        return $q.when(venues);
       },
-      getLunch : function(lunchId){
-        return $q.when(_.find(lunches, {id: lunchId}));
+      getLunch : function(venueId){
+        return $q.when(_.find(venues, {id: venueId}));
       }
     };
   }
