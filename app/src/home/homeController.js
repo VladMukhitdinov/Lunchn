@@ -3,24 +3,23 @@
   angular
        .module('home')
        .controller('HomeController', [
-          '$mdSidenav', '$mdBottomSheet', '$log', '$q',
-          LoginController
+          '$state', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          HomeController
        ]);
 
-  function LoginController($scope, loginService, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function HomeController($state, $mdSidenav, $mdBottomSheet, $log, $q) {
     var self = this;
-    self.login = login;
+    self.create = create;
+    self.find = find;
 
-    // *********************************
-    // Internal methods
-    // *********************************
-    function login(){
-      loginService
-            .attemptSignIn()
-            .then( function( user ) {
-              $scope.$emit('userSignedIn')
-            });
-    };
+    function create(){
+      $state.go('create');
+    }
+
+    function find(){
+      $state.go('find');
+    }
+
   }
 
 })();

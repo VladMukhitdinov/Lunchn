@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" >
   <head>
-    <title>Angular Material - Starter App</title>
+    <title>Lunch'n</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
     <link rel="stylesheet" href="assets/app.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" />
 
     <style type="text/css">
         /**
@@ -43,9 +44,17 @@
     <script src="./src/home/home.js"></script>
     <script src="./src/home/homeController.js"></script>
 
+    <script src="./src/create-lunch/create.js"></script>
+    <script src="./src/create-lunch/createController.js"></script>
+    <script src="./src/create-lunch/createService.js"></script>
+
+    <script src="./src/find-lunch/find.js"></script>
+    <script src="./src/find-lunch/findController.js"></script>
+    <script src="./src/find-lunch/findService.js"></script>
+
     <script type="text/javascript">
           angular
-              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login', 'home'])
+              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login', 'home', 'create', 'find'])
               .config(function($mdThemingProvider, $mdIconProvider, $urlRouterProvider){
                   $mdIconProvider
                       .defaultIconSet("./assets/svg/avatars.svg", 128)

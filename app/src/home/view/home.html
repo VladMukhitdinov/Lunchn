@@ -1,3 +1,15 @@
 <div id="login-page" ng-controller="HomeController as ctrl">
- Home
+  <img src="/assets/img/logo-sm.png" />
+  <br/>
+  <md-button class="md-raised md-accent" ng-click="ctrl.create($event)">
+    <md-icon md-font-icon="fa-plus" class="fa fa-lg"></md-icon>
+    Create a lunch
+  </md-button>
+
+  <br/>
+
+  <md-button class="md-raised md-accent" ng-click="ctrl.find($event)">
+    <md-icon md-font-icon="fa-search" class="fa fa-lg"></md-icon>
+    Find a lunch
+  </md-button>
 </div>
