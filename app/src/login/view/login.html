@@ -1,1 +1,8 @@
-<div>Hello</div>
+<div id="login-page" ng-controller="LoginController as ctrl">
+  <img src="/assets/img/logo.png" />
+  <br/>
+  <md-button class="md-raised md-accent" ng-click="ctrl.login($event)">
+    <md-icon md-svg-src="google_plus"></md-icon>
+    Sign in with Google
+  </md-button>
+</div>

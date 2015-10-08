@@ -4,13 +4,14 @@
          .service('LoginService', ['$q', LoginService]);
 
   function LoginService($q){
-debugger;
-
-    // Promise-based API
+    var user = {
+      name: 'Chris',
+      email: 'chriscbrock@gmail.com'
+    }
     return {
       attemptSignIn : function() {
         // Simulate async nature of real remote calls
-        // Do google login stuff
+        return $q.when(user);
       }
     };
   }

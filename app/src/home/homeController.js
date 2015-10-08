@@ -1,9 +1,9 @@
 (function(){
 
   angular
-       .module('login')
-       .controller('LoginController', [
-          '$scope','LoginService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+       .module('home')
+       .controller('HomeController', [
+          '$mdSidenav', '$mdBottomSheet', '$log', '$q',
           LoginController
        ]);
 
@@ -14,7 +14,7 @@
     // *********************************
     // Internal methods
     // *********************************
-    function login(){    
+    function login(){
       loginService
             .attemptSignIn()
             .then( function( user ) {
