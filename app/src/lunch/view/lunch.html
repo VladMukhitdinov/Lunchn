@@ -1,11 +1,26 @@
-<div ng-controller="LunchController as ctrl">
-  <div layout="column">
-    <md-list>
-      <md-subheader class="md-no-sticky">Chat</md-subheader>
+<div ng-controller="LunchController as ctrl" layout-padding>
 
-      <md-list-item class="md-3-line" ng-repeat="line in ctrl.lunch.chat" ng-click="ctrl.goToLunch(lunch.id, $event)">
+  <h2 class="md-title">
+    {{ ctrl.lunch.venue}} on {{ ctrl.lunch.date }} with {{ ctrl.lunch.members.length }} people
+  </h2>
+
+  <div layout="row">
+
+    <md-virtual-repeat-container class="chat-container md-whiteframe-2dp" layout-padding>
+      <div md-virtual-repeat="line in ctrl.lunch.chat" class="chat-line" flex>
+        <strong ng-show="line.user" class="md-accent">
+          {{ line.user }}
+        </strong>
+        <span ng-class="{'system-message': !line.user}">{{line.message}}</span>
+      </div>
+    </md-virtual-repeat-container>
+
+    <md-list style="width: 30%">
+      <md-subheader class="md-no-sticky">Lunch mates</md-subheader>
+
+      <md-list-item class="md-3-line" ng-repeat="member in ctrl.lunch.members" ng-click="ctrl.goToLunch(lunch.id, $event)">
           <div class="md-list-item-text" layout="column">
-            <h4>{{ line }}</h4>
+            <h4>{{ member }}</h4>
           </div>
           <md-divider></md-divider>
         </md-list-item>

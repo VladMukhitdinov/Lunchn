@@ -1,4 +1,4 @@
-<md-dialog id="create-page" ng-controller="CreateController as ctrl" ng-cloak style="width: 50%">
+<md-dialog id="create-page" ng-controller="CreateController as ctrl" ng-cloak style="mjn-width: 50%">
 
   <md-toolbar>
       <div class="md-toolbar-tools">
@@ -17,15 +17,24 @@
       to head out with for a bite to eat!
     </p>
 
-    <div layout="row">
-      <md-input-container style="width: 70%">
-        <label>Where are we headed?</label>
-        <input ng-model="lunch.venue">
-      </md-input-container>
-      <md-input-container>
-        <md-datepicker ng-model="lunch.date" md-placeholder="Enter date" style="width:50%"></md-datepicker>
-      </md-input-container>
-    </div>
+    <md-input-container style="padding-bottom: 0;">
+      <md-autocomplete flex required
+            md-input-name="autocompleteField"
+            md-no-cache="ctrl.noCache"
+            md-selected-item="ctrl.selectedItem"
+            md-selected-item-change="ctrl.selectedItemChange(item)"
+            md-search-text="ctrl.searchText"
+            md-items="item in ctrl.querySearch(ctrl.searchText)"
+            md-item-text="item.name"
+            md-floating-label="Where are we headed?">
+          <md-item-template>
+            <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+          </md-item-template>
+        </md-autocomplete>
+    </md-input-container>
+    <md-input-container>
+      <md-datepicker ng-model="lunch.date" md-placeholder="Choose when" style="width:50%"></md-datepicker>
+    </md-input-container>
 
     <md-content class="location-container" >
       <md-input-container>

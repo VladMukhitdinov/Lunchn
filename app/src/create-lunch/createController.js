@@ -3,20 +3,48 @@
   angular
        .module('create')
        .controller('CreateController', [
-          '$scope', '$mdDialog', '$q',
+          'venueService', '$scope', '$mdDialog', '$q',
           CreateController
        ]);
 
-  function CreateController( $scope, $mdDialog, $q) {
+  function CreateController( service, $scope, $mdDialog, $q) {
     var self = this;
     self.cancel = cancel;
-    self.addLocation = false;
+    self.venues = [];
+    self.querySearch        = querySearch;
+    self.selectedItemChange = selectedItemChange;
+    self.searchText         = null;
+    self.searchTextChange   = searchTextChange;
 
+    service
+      .getAllVenues()
+      .then(function(venues){
+        self.venues = [].concat(venues);
+      });
+
+    function querySearch(query){
+      var results = query ? self.venues.filter( createFilterFor(query) ) : [];
+      return results;
+    }
+
+    function createFilterFor(query) {
+      var lowercaseQuery = angular.lowercase(query);
+      return function filterFn(venue) {
+        return (venue.name.toLowerCase().indexOf(lowercaseQuery) === 0);
+      };
+    }
+
+    function selectedItemChange(){
+      $log.info('Text changed to ' + text);
+    }
+
+    function searchTextChange(){
+      $log.info('Item changed to ' + JSON.stringify(item));
+    }
 
     $scope.$on('mapInitialized', function(event, map) {
       var markers = [];
         var input = document.getElementById('pac-input');
-        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
         var searchBox = new google.maps.places.SearchBox(input);
 
         map.addListener('bounds_changed', function() {
@@ -54,7 +82,6 @@
                 });
 
                 markers.push(marker);
-
                 bounds.extend(place.geometry.location);
             }
 
