@@ -3,20 +3,23 @@
   angular
        .module('login')
        .controller('LoginController', [
-          '$scope','LoginService', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          '$scope', 'LoginService', '$mdSidenav', '$mdBottomSheet', '$log', '$q', '$auth',
           LoginController
        ]);
 
-  function LoginController($scope, loginService, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function LoginController($scope,loginService, $mdSidenav, $mdBottomSheet, $log, $q, $auth) {
     var self = this;
     self.login = login;
 
+	// $scope.authenticate = function(provider) {		
+      // $auth.authenticate(provider);
+    // };
     // *********************************
     // Internal methods
     // *********************************
-    function login(){    
+    function login(event, provider){    
       loginService
-            .attemptSignIn()
+            .attemptSignIn(provider)
             .then( function( user ) {
               $scope.$emit('userSignedIn')
             });
