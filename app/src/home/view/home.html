@@ -1,15 +1,22 @@
-<div id="login-page" ng-controller="HomeController as ctrl">
-  <img src="/assets/img/logo-sm.png" />
-  <br/>
-  <md-button class="md-raised md-accent" ng-click="ctrl.create($event)">
-    <md-icon md-font-icon="fa-plus" class="fa fa-lg"></md-icon>
-    Create a lunch
-  </md-button>
+<div id="home-page" ng-controller="HomeController as ctrl">
+  <md-list>
+    <md-subheader class="md-no-sticky">Recently created lunches</md-subheader>
 
-  <br/>
+    <md-list-item class="md-3-line" ng-repeat="lunch in ctrl.lunches" ng-click="ctrl.goToLunch(lunch.id, $event)">
+      <div class="md-avatar" aria-label="{{ lunch.venue }}" style="background-color: #{{ ctrl.getVenueColour(lunch.venue) }}">
+          <md-icon class="list-icon">
+            {{ lunch.venue.charAt(0).toUpperCase() }}
+          </md-icon>
+      </div>
+        <div class="md-list-item-text" layout="column">
+          <h3>{{ lunch.venue }} on {{ lunch.date }}</h3>
+          <h4>Created by {{ lunch.creator }}</h4>
+        </div>
+        <md-divider></md-divider>
+      </md-list-item>
+  </md-list>
 
-  <md-button class="md-raised md-accent" ng-click="ctrl.find($event)">
-    <md-icon md-font-icon="fa-search" class="fa fa-lg"></md-icon>
-    Find a lunch
+  <md-button class="md-fab md-fab-bottom-right md-accent" ng-click="ctrl.createLunch($event)" aria-label="Add..." style="position: fixed">
+    <md-icon md-font-icon="fa-plus" class="fa fa-2x" style="color: white"></md-icon>
   </md-button>
 </div>

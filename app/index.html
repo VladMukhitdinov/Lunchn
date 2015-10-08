@@ -14,9 +14,6 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.css" />
 
     <style type="text/css">
-        /**
-         * Hide when Angular is not yet loaded and initialized
-         */
         [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
           display: none !important;
         }
@@ -24,8 +21,26 @@
 
   </head>
 
-  <body ng-app="lunchnApp" layout="row" ng-cloak >
-    <div ui-view></div>
+  <body ng-app="lunchApp" layout="row" ng-cloak >
+    <md-content flex>
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <md-button class="md-icon-button" aria-label="Settings">
+            <md-icon md-svg-src="menu"></md-icon>
+            <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+          </md-button>
+          <h2>
+            <span>Lunch'n</span>
+          </h2>
+          <span flex></span>
+          <md-button class="md-icon-button" aria-label="Search">
+            <md-icon md-font-icon="fa-search" class="fa fa-lg"></md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+      <div ui-view></div>
+    </md-content>
+
 
     <!-- Angular Material Dependencies -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
@@ -33,10 +48,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
 
-
     <!-- Angular Material Javascript now available via Google CDN; version 0.11.2 used here -->
     <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
-	<script src="./src/login/satellizer.js"></script>
+    <script src="./assets/script/satellizer.js"></script>
+    <script src="./assets/script/lodash.js"></script>
+    <script src="//maps.google.com/maps/api/js?key=AIzaSyBD24Qy8sBRHZxsb2JHdajDChiBP32oOuc&libraries=places"></script>
+    <script src="./assets/script/ng-map.min.js"></script>
+
     <script src="./src/login/login.js"></script>
     <script src="./src/login/loginController.js"></script>
     <script src="./src/login/loginService.js"></script>
@@ -48,13 +66,13 @@
     <script src="./src/create-lunch/createController.js"></script>
     <script src="./src/create-lunch/createService.js"></script>
 
-    <script src="./src/find-lunch/find.js"></script>
-    <script src="./src/find-lunch/findController.js"></script>
-    <script src="./src/find-lunch/findService.js"></script>
+    <script src="./src/lunch/lunch.js"></script>
+    <script src="./src/lunch/lunchController.js"></script>
 
     <script type="text/javascript">
+
           angular
-              .module('lunchnApp', ['ngMaterial', 'ui.router', 'login', 'home', 'create', 'find'])
+              .module('lunchApp', ['ngMaterial', 'ui.router', 'login', 'lunch', 'home', 'create', 'ngMap'])
               .config(function($mdThemingProvider, $mdIconProvider, $urlRouterProvider){
                   $mdIconProvider
                       .defaultIconSet("./assets/svg/avatars.svg", 128)
@@ -65,23 +83,33 @@
                       .icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
                       .icon("phone"      , "./assets/svg/phone.svg"       , 512);
 
-                      $mdThemingProvider.theme('default')
-                          .primaryPalette('blue')
-                          .accentPalette('lime');
+                      paletteMap = $mdThemingProvider.extendPalette('teal',{
+                        '500': '4a9698'
+                      });
+                      $mdThemingProvider.definePalette('lunchnTeal', paletteMap);
 
-                          //console.log($rootScope)
+                      $mdThemingProvider.theme('default')
+                          .primaryPalette('lunchnTeal')
+                          .accentPalette('deep-orange')
+                          .warnPalette('lime');
+
+                          //uiGmapGoogleMapApiProvider.configure({
+                          //    key: 'AIzaSyBD24Qy8sBRHZxsb2JHdajDChiBP32oOuc',
+                          //    v: '3.20', //defaults to latest 3.X anyhow
+                          //    libraries: 'weather,geometry,visualization'
+                          //});
 
                       $urlRouterProvider.otherwise("/login");
               })
               .run(function($rootScope, $state){
                 $rootScope.$on('userSignedIn', function(){
-                  alert('signedIn')
                   $rootScope.signedIn = true;
                   $state.go('home')
                 })
               });
 
     </script>
+    <script src="./src/lunch/lunchService.js"></script>
 
   </body>
 </html>

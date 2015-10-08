@@ -1,3 +1,49 @@
-<div id="login-page" ng-controller="CreateController as ctrl">
-  Create lunch
-</div>
+<md-dialog id="create-page" ng-controller="CreateController as ctrl" ng-cloak style="width: 50%">
+
+  <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Create a lunch</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="ctrl.cancel()">
+          <md-icon md-font-icon="fa-times" class="fa fa-lg" style="color: white" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+  <md-dialog-content>
+    <p>
+      <strong>Awesome!</strong>
+      Chuck in a few vital bits of info, and we'll start finding you some mates
+      to head out with for a bite to eat!
+    </p>
+
+    <div layout="row">
+      <md-input-container style="width: 70%">
+        <label>Where are we headed?</label>
+        <input ng-model="lunch.venue">
+      </md-input-container>
+      <md-input-container>
+        <md-datepicker ng-model="lunch.date" md-placeholder="Enter date" style="width:50%"></md-datepicker>
+      </md-input-container>
+    </div>
+
+    <md-content class="location-container" >
+      <md-input-container>
+        <label>What's the address?</label>
+        <input ng-model="lunch.address" id="pac-input" placeholder="Search for address">
+      </md-input-container>
+      <map center="-37.782, 175.352" zoom="15"></map>
+    </md-content>
+<br/>
+    <md-checkbox ng-model="data.cb1" aria-label="Have a vehicle?">
+      Check this if you can provide transport.
+    </md-checkbox>
+
+    <md-button class="md-raised md-primary">
+      <md-icon md-font-icon="fa-check" class="fa fa-lg"></md-icon>
+      Create lunch
+    </md-button>
+
+  </md-dialog-content>
+
+</md-dialog>

@@ -3,23 +3,47 @@
   angular
        .module('home')
        .controller('HomeController', [
-          '$state', '$mdSidenav', '$mdBottomSheet', '$log', '$q',
+          'lunchService', '$state', '$mdDialog', '$mdBottomSheet', '$log', '$q',
           HomeController
        ]);
 
-  function HomeController($state, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function HomeController(service, $state, $mdDialog, $mdBottomSheet, $log, $q) {
     var self = this;
-    self.create = create;
-    self.find = find;
 
-    function create(){
-      $state.go('create');
+    self.lunches = [];
+    self.getVenueColour = getVenueColour;
+    self.goToLunch = goToLunch;
+    self.createLunch = createLunch;
+
+    function createLunch($event){
+      $mdDialog.show({
+          targetEvent: $event,
+          templateUrl: './src/create-lunch/view/create.html',
+          controller: 'CreateController'
+        });
     }
 
-    function find(){
-      $state.go('find');
+    function getVenueColour(venueName){      
+      var hash = 0;
+      for (var i = 0; i < venueName.length; i++) {
+         hash = venueName.charCodeAt(i) + ((hash << 5) - hash);
+      }
+      var c = (hash & 0x00FFFFFF)
+          .toString(16)
+          .toUpperCase();
+
+      return "00000".substring(0, 6 - c.length) + c;
     }
 
+    function goToLunch(lunchId){
+      $state.go('lunch', {lunchId: lunchId});
+    }
+
+    service
+          .getRecentLunches()
+          .then( function( lunches ) {
+            self.lunches  = [].concat(lunches);
+          });
   }
 
 })();
