@@ -4,23 +4,22 @@
        .module('home')
        .controller('HomeController', [
           '$mdSidenav', '$mdBottomSheet', '$log', '$q',
-          LoginController
+          HomeController
        ]);
 
-  function LoginController($scope, loginService, $mdSidenav, $mdBottomSheet, $log, $q) {
+  function HomeController($scope, loginService, $mdSidenav, $mdBottomSheet, $log, $q) {
     var self = this;
-    self.login = login;
+    self.create = create;
+    self.find = find;
 
-    // *********************************
-    // Internal methods
-    // *********************************
-    function login(){
-      loginService
-            .attemptSignIn()
-            .then( function( user ) {
-              $scope.$emit('userSignedIn')
-            });
-    };
+    function create(){
+      alert('create');
+    }
+
+    function find(){
+      alert('find');
+    }
+
   }
 
 })();
