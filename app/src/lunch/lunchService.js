@@ -18,7 +18,7 @@
        {id: 9, venueid: 20, date: "2015/10/23", maxpeople: 3, creator: "Ray", people: ["Ray", "Vladamir"]},
        {id: 10, venueid: 21, date: "2015/10/23", maxpeople: 5, creator: "Nic", people: ["Angela", "Rachelle", "Marie", "Louise", "Nic"]},
        {id: 11, venueid: 22, date: "2015/10/16", maxpeople: 2, creator: "Vladamir", people: ["Vladamir", "J\'nan"]},
-       {id: 12, venueid: 23, date: "2015/10/16", maxpeople: 4, creator: "Somitha", people: ["Somitha", "J'nan", "Wendy"]},
+       {id: 12, venueid: 23, date: "2015/10/16", maxpeople: 7, creator: "Somitha", people: ["Somitha", "J'nan", "Wendy"]},
        {id: 13, venueid: 9, date: "2015/10/27", maxpeople: 4, creator: "Shannon", people: ["Alan", "Jenny", "Shannon"]},
        {id: 14, venueid: 28, date: "2015/10/13", maxpeople: 4, creator: "Chris", people: ["Shannon", "Phil", "Chris"]},
        {id: 15, venueid: 29, date: "2015/10/28", maxpeople: 3, creator: "Andrew", people: ["Andrew", "Dave", "Steve"]},
