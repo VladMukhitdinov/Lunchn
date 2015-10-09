@@ -3,14 +3,25 @@
   angular
        .module('lunch')
        .controller('LunchController', [
-          'lunchService', 'venueService', '$stateParams',
+          'lunchService', 'venueService', '$stateParams', '$mdToast',
           LunchController
        ]);
 
-  function LunchController(service, venueService, $stateParams) {
+  function LunchController(service, venueService, $stateParams, toast) {
     var self = this;
 
     self.lunch = {};
+    self.joinLunch = joinLunch;
+
+    function joinLunch(){
+      self.lunch.chat.push({ message: 'Ray joined', user: null});
+      toast.show(
+            toast.simple()
+              .content('Enjoy your lunch!')
+              .position('top left')
+              .hideDelay(3000)
+          );
+    }
 
     service
           .getLunch(parseInt($stateParams.lunchId))
@@ -31,7 +42,7 @@
               { message: 'What time are we leaving?', user: 'Nicola'},
               { message: 'About 11:45?', user: 'Vlad'},
               { message: 'Sounds good', user: 'Nicola'},
-              { message: 'Ray joined', user: null},
+
               { message: 'Reynard joined', user: null}
             ];
             lunch.coords = '-37.782, 175.352';
