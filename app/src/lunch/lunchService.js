@@ -41,9 +41,12 @@
         var newLunch = {};
         newLunch.id = _.last(lunches).id + 1;
         newLunch.venueId = lunch.venue.id;
-        newLunch.date = lunch.date;
+        newLunch.date = lunch.date.toISOString().slice(0, 10);;
         newLunch.creator = 'Ray';
-        lunches.unshift(newLunch);
+        newLunch.maxpeople = 5;
+        newLunch.people = ['Ray'];
+        lunches.unshift(newLunch)
+        return $q.when(newLunch);
       }
     };
   }

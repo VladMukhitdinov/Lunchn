@@ -3,17 +3,19 @@
   angular
        .module('home')
        .controller('HomeController', [
-          'lunchService', 'venueService', '$state', '$mdDialog', '$mdBottomSheet', '$log', '$q',
+          'lunchService', 'venueService', '$scope', '$state', '$mdDialog', '$mdBottomSheet', '$log', '$q',
           HomeController
        ]);
 
-  function HomeController(lunchService, venueService, $state, $mdDialog, $mdBottomSheet, $log, $q) {
+  function HomeController(lunchService, venueService, $scope, $state, $mdDialog, $mdBottomSheet, $log, $q) {
     var self = this;
 
     self.lunches = [];
     self.getVenueColour = getVenueColour;
     self.goToLunch = goToLunch;
     self.createLunch = createLunch;
+
+    $scope.$on('lunchAdded', load);
 
     function createLunch($event){
       $mdDialog.show({
@@ -39,6 +41,7 @@
       $state.go('lunch', {lunchId: lunchId});
     }
 
+    function load(){
     lunchService
           .getRecentLunches()
           .then( function( lunches ) {
@@ -53,6 +56,8 @@
 
               })
           });
+    }
+    load();
   }
 
 })();

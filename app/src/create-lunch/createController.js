@@ -27,6 +27,7 @@
     function createLunch(){
       lunchService.createLunch(self.lunch)
       .then(function(){
+        $scope.$emit('lunchAdded');
         self.cancel();
       })
     }
