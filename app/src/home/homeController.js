@@ -3,11 +3,11 @@
   angular
        .module('home')
        .controller('HomeController', [
-          'lunchService', '$state', '$mdDialog', '$mdBottomSheet', '$log', '$q',
+          'lunchService', 'venueService', '$state', '$mdDialog', '$mdBottomSheet', '$log', '$q',
           HomeController
        ]);
 
-  function HomeController(service, $state, $mdDialog, $mdBottomSheet, $log, $q) {
+  function HomeController(lunchService, venueService, $state, $mdDialog, $mdBottomSheet, $log, $q) {
     var self = this;
 
     self.lunches = [];
@@ -23,7 +23,7 @@
         });
     }
 
-    function getVenueColour(venueName){      
+    function getVenueColour(venueName){
       var hash = 0;
       for (var i = 0; i < venueName.length; i++) {
          hash = venueName.charCodeAt(i) + ((hash << 5) - hash);
@@ -39,10 +39,19 @@
       $state.go('lunch', {lunchId: lunchId});
     }
 
-    service
+    lunchService
           .getRecentLunches()
           .then( function( lunches ) {
             self.lunches  = [].concat(lunches);
+            venueService
+              .getAllVenues()
+              .then(function(venues){
+                _.each(self.lunches, function(lunch){
+                  var venue = _.find(venues, {id: lunch.venueid});
+                  lunch.venue = venue;
+                })
+
+              })
           });
   }
 

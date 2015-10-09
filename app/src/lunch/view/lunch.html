@@ -1,29 +1,44 @@
-<div ng-controller="LunchController as ctrl" layout-padding>
+<div ng-controller="LunchController as ctrl" layout-padding id="lunch-page">
 
   <h2 class="md-title">
-    {{ ctrl.lunch.venue}} on {{ ctrl.lunch.date }} with {{ ctrl.lunch.members.length }} people
+    {{ ctrl.lunch.venue.name}} on {{ ctrl.lunch.date }} with {{ ctrl.lunch.people.length }} people
+    ({{ ctrl.lunch.maxpeople - ctrl.lunch.people.length }} space left)
   </h2>
 
   <div layout="row">
 
-    <md-virtual-repeat-container class="chat-container md-whiteframe-2dp" layout-padding>
-      <div md-virtual-repeat="line in ctrl.lunch.chat" class="chat-line" flex>
+    <md-content class="chat-container md-whiteframe-2dp" layout-padding>
+      <div ng-repeat="line in ctrl.lunch.chat" class="chat-line" flex>
         <strong ng-show="line.user" class="md-accent">
           {{ line.user }}
         </strong>
         <span ng-class="{'system-message': !line.user}">{{line.message}}</span>
       </div>
-    </md-virtual-repeat-container>
 
-    <md-list style="width: 30%">
-      <md-subheader class="md-no-sticky">Lunch mates</md-subheader>
+      <md-content class="chat-message" layout="row">
+      <md-input-container>
+        <label>Send a message to other members of this lunch</label>
+        <input ng-model="lunch.venue.address" id="pac-input">
 
-      <md-list-item class="md-3-line" ng-repeat="member in ctrl.lunch.members" ng-click="ctrl.goToLunch(lunch.id, $event)">
-          <div class="md-list-item-text" layout="column">
-            <h4>{{ member }}</h4>
-          </div>
-          <md-divider></md-divider>
-        </md-list-item>
-    </md-list>
+      </md-input-container>
+      <md-button class="md-primary">
+        Send
+      </md-button>
+    </md-content>
+    </md-content>
+
+    <md-content style="width: 25%; margin-left: 71%;">
+      <h3>Need a lift?</h3>
+      <a href="#"><img src="http://www.weddingideasmag.com/wp-content/uploads/2012/11/uber-logo.gif" style="width: 100px;" /></a>
+
+      <h3>After a bargain?</h3>
+      <img src="http://www.eyeworld.ie/wp-content/uploads/2014/01/GrabOnePNG.png" style="width: 100px;" /><br/>
+      <a href="#">$50 voucher for $25 on GrabOne now!</a>
+
+
+      <h3>Location</h3>
+      <p>{{ ctrl.lunch.venue.address }}</p>
+      <map center="{{ ctrl.lunch.venue.location }}" zoom="15"></map>
+    </md-content>
   </div>
 </div>

@@ -3,11 +3,11 @@
   angular
        .module('lunch')
        .controller('LunchController', [
-          'lunchService', '$stateParams',
+          'lunchService', 'venueService', '$stateParams',
           LunchController
        ]);
 
-  function LunchController(service, $stateParams) {
+  function LunchController(service, venueService, $stateParams) {
     var self = this;
 
     self.lunch = {};
@@ -15,8 +15,13 @@
     service
           .getLunch(parseInt($stateParams.lunchId))
           .then( function( lunch ) {
+            venueService
+              .getVenue(lunch.venueid)
+              .then(function(venue){
+                lunch.venue = venue;
+              });
+
             // Fake in some data
-            lunch.members = ['Chris', 'Vlad', 'Nicola', 'Ray', 'Reynard'];
             lunch.chat = [
               { message: 'Chris created lunch', user: null},
               { message: 'Vlad joined!', user: null},

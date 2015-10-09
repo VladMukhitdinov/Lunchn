@@ -3,24 +3,33 @@
   angular
        .module('create')
        .controller('CreateController', [
-          'venueService', '$scope', '$mdDialog', '$q',
+          'venueService', 'lunchService', '$scope', '$mdDialog', '$q',
           CreateController
        ]);
 
-  function CreateController( service, $scope, $mdDialog, $q) {
+  function CreateController( venueService, lunchService, $scope, $mdDialog, $q) {
     var self = this;
     self.cancel = cancel;
     self.venues = [];
+    self.map = null;
     self.querySearch        = querySearch;
     self.selectedItemChange = selectedItemChange;
+    self.createLunch        = createLunch;
     self.searchText         = null;
-    self.searchTextChange   = searchTextChange;
+    self.markers            = [];
 
-    service
+    venueService
       .getAllVenues()
       .then(function(venues){
         self.venues = [].concat(venues);
       });
+
+    function createLunch(){
+      lunchService.createLunch(self.lunch)
+      .then(function(){
+        self.cancel();
+      })
+    }
 
     function querySearch(query){
       var results = query ? self.venues.filter( createFilterFor(query) ) : [];
@@ -34,16 +43,31 @@
       };
     }
 
-    function selectedItemChange(){
-      $log.info('Text changed to ' + text);
+    function selectedItemChange(item){
+      if(!item) return;
+
+      clearMarkers();
+      self.lunch.venue = item;
+      var lat = parseFloat(self.lunch.venue.location.split(',')[0]);
+      var lng = parseFloat(self.lunch.venue.location.split(',')[1]);
+      self.map.setCenter({lat: lat, lng: lng});
+      var marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: self.map});
+      self.markers.push(marker);
+      document.getElementById('pac-input').value = item.address;
     }
 
-    function searchTextChange(){
-      $log.info('Item changed to ' + JSON.stringify(item));
+    function clearMarkers(){
+      for (var i = 0, marker; marker = self.markers[i]; i++) {
+        marker.setMap(null);
+      }
+
+      // For each place, get the icon, place name, and location.
+      self.markers = [];
     }
 
     $scope.$on('mapInitialized', function(event, map) {
-      var markers = [];
+
+        self.map = map;
         var input = document.getElementById('pac-input');
         var searchBox = new google.maps.places.SearchBox(input);
 
@@ -57,12 +81,9 @@
             if (places.length == 0) {
               return;
             }
-            for (var i = 0, marker; marker = markers[i]; i++) {
-              marker.setMap(null);
-            }
 
-            // For each place, get the icon, place name, and location.
-            markers = [];
+            clearMarkers();
+
             var bounds = new google.maps.LatLngBounds();
             for (var i = 0, place; place = places[i]; i++) {
                 var image = {
@@ -81,7 +102,7 @@
                     position: place.geometry.location
                 });
 
-                markers.push(marker);
+                self.markers.push(marker);
                 bounds.extend(place.geometry.location);
             }
 
@@ -90,7 +111,7 @@
     });
 
     self.lunch = {
-      venue: '',
+      venue: {location: '-37.782, 175.352'},
       date: ''
     };
 

@@ -8,15 +8,14 @@
 
     var venues = [
       {id: 1, name: 'Subway - Silverdale Rd', location: '-37.7895482,175.3257643', address: '122 Silverdale Road, Silverdale'},
-      {id: 2, name: 'Subway - Grey St', location: '-37.7757945,175.2837887', address: '372 Grey Street, Hamilton East'},
-      {id: 3, name: 'Subway - Victoria St', location: '-37.7699599,175.254778', address: '159 Victoria Street, Hamilton Central'},
-      {id: 4, name: 'Subway - Ulster St', location: '-37.7699599,175.254778', address: '15 Ulster Street, Whitiora'},
-      {id: 5, name: 'Subway - Centre Place', location: '-37.7699599,175.254778', address: 'Ward Street, Centre Place Mall'},
-      {id: 6, name: 'Subway - Greenwood', location: '-37.7699599,175.254778', address: '65 Greenwood Street, Frankton'},
-      {id: 7, name: 'McDonald\'s - Grey St', location: '-37.7699599,175.254778', address: '315 Grey Street, Hamilton East'},
-      {id: 8, name: 'McDonald\'s - Worley Pl', location: '-37.7699599,175.254778', address: '8 Worley Place, Hamilton Central'},
-      {id: 9, name: 'McDonald\'s - Peach Grove Rd', location: '-37.7699599,175.254778', address: '321 Peach Grove Road, Claudelands'},
-      {id: 10, name: 'McDonald\'s - Greenwood St', location: '-37.7699599,175.254778', address: '28-28 Greenwood Street, Frankton'},
+      {id: 3, name: 'Subway - Victoria St', location: '-37.7895477,175.282595', address: '159 Victoria Street, Hamilton Central'},
+      {id: 4, name: 'Subway - Ulster St', location: '-37.7795022,175.2730272', address: '15 Ulster Street, Whitiora'},
+      {id: 5, name: 'Subway - Centre Place', location: '-37.7862807,175.2784383', address: 'Ward Street, Centre Place Mall'},
+      {id: 6, name: 'Subway - Greenwood', location: '-37.7921127,175.2575893', address: '65 Greenwood Street, Frankton'},
+      {id: 7, name: 'McDonald\'s - Grey St', location: '-37.7943467,175.2913665', address: '315 Grey Street, Hamilton East'},
+      {id: 8, name: 'McDonald\'s - Worley Pl', location: '-37.7871147,175.2786474', address: '8 Worley Place, Hamilton Central'},
+      {id: 9, name: 'McDonald\'s - Peach Grove Rd', location: '-37.7731984,175.2914278', address: '321 Peach Grove Road, Claudelands'},
+      {id: 10, name: 'McDonald\'s - Greenwood St', location: '-37.7884145,175.1842823', address: '28-28 Greenwood Street, Frankton'},
       {id: 11, name: 'McDonald\'s - Hukanui Rd', location: '-37.7728094,175.2585545', address: '183 Hukanui Road, Chartwell'},
       {id: 12, name: 'McDonald\'s - Te Rapa', location: '-37.7728094,175.2585545', address: '2 Pukete Road, Te Rapa'},
       {id: 13, name: 'The Cook', location: '-37.7933147,175.2940284', address: '7 Cook Street, Hamilton East'},
@@ -54,7 +53,7 @@
       getAllVenues : function() {
         return $q.when(venues);
       },
-      getLunch : function(venueId){
+      getVenue : function(venueId){
         return $q.when(_.find(venues, {id: venueId}));
       }
     };

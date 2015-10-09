@@ -7,27 +7,27 @@
   function LunchService($q){
 
     var lunches = [
-      {id: 1, venue: 'Subway', date: '12/10/2015', creator: 'Marcus'},
-      {id: 2, venue: 'McDonald\'s', date: '12/10/2015', creator: 'Ben'},
-      {id: 3, venue: 'The Cook', date: '13/10/2015', creator: 'Mike'},
-      {id: 4, venue: 'Mavis & Co', date: '14/10/2015', creator: 'Zoe'},
-      {id: 5, venue: 'Grey St Kitchen', date: '15/10/2015', creator: 'Fred'},
-      {id: 6, venue: 'Hydro Cafe', date: '20/10/2015', creator: 'Reynard'},
-      {id: 7, venue: 'Two Birds Eatery', date: '19/10/2015', creator: 'Jenny'},
-      {id: 8, venue: 'Homestead', date: '21/10/2015', creator: 'Alan'},
-      {id: 9, venue: 'Chim Choo Ree', date: '23/10/2015', creator: 'Ray'},
-      {id: 10, venue: 'Gothenburg', date: '23/10/2015', creator: 'Nic'},
-      {id: 11, venue: 'Scotts Epicurean', date: '16/10/2015', creator: 'Vladimir'},
-      {id: 12, venue: 'Jack\'s', date: '16/10/2015', creator: 'Somitha'},
-      {id: 13, venue: 'Momento', date: '27/10/2015', creator: 'Shannon'},
-      {id: 14, venue: 'S\'orbi', date: '13/10/2015', creator: 'Chris'},
-      {id: 15, venue: 'Rocket Espresso', date: '28/10/2015', creator: 'Andrew'},
-      {id: 16, venue: 'The River Kitchen', date: '28/10/2015', creator: 'Emily'},
-      {id: 17, venue: 'deVice Cafe', date: '16/10/2015', creator: 'Tony'},
-      {id: 18, venue: 'Starbucks', date: '15/10/2015', creator: 'Tim'},
-      {id: 19, venue: 'Pita Pit', date: '14/10/2015', creator: 'Travis'},
-      {id: 20, venue: 'Hell Pizza', date: '12/10/2015', creator: 'Stacey'}
-    ];
+      {id: 1, venueid: 3, date: "2015/10/12", maxpeople: 3, creator: "Marcus", people: ["Marcus", "Darren"]},
+      {id: 2, venueid: 7, date: "2015/10/12", maxpeople: 2, creator: "Ben", people: ["Ben"]},
+      {id: 3, venueid: 13, date: "2015/10/13", maxpeople: 4, creator: "Mike", people: ["Chris", "Ray", "Vladamir", "Mike"]},
+      {id: 4, venueid: 14, date: "2015/10/14", maxpeople: 5, creator: "Zoe", people: ["Zoe", "Fred", "Shane", "Mike"]},
+      {id: 5, venueid: 16, date: "2015/10/15", maxpeople: 3, creator: "Fred", people: ["Fred", "Kerry"]},
+      {id: 6, venueid: 17, date: "2015/10/20", maxpeople: 4, creator: "Reynard", people: ["Reynard", "Rachelle", "Tracey", "Jemma"]},
+       {id: 7, venueid: 18, date: "2015/10/19", maxpeople: 2, creator: "Jenny", people: ["Jenny"]},
+       {id: 8, venueid: 19, date: "2015/10/21", maxpeople: 4, creator: "Alan", people: ["Alan", "Natasha", "Angela", "Chris"]},
+       {id: 9, venueid: 20, date: "2015/10/23", maxpeople: 3, creator: "Ray", people: ["Ray", "Vladamir"]},
+       {id: 10, venueid: 21, date: "2015/10/23", maxpeople: 5, creator: "Nic", people: ["Angela", "Rachelle", "Marie", "Louise", "Nic"]},
+       {id: 11, venueid: 22, date: "2015/10/16", maxpeople: 2, creator: "Vladamir", people: ["Vladamir", "J\'nan"]},
+       {id: 12, venueid: 23, date: "2015/10/16", maxpeople: 4, creator: "Somitha", people: ["Somitha", "J'nan", "Wendy"]},
+       {id: 13, venueid: 9, date: "2015/10/27", maxpeople: 4, creator: "Shannon", people: ["Alan", "Jenny", "Shannon"]},
+       {id: 14, venueid: 28, date: "2015/10/13", maxpeople: 4, creator: "Chris", people: ["Shannon", "Phil", "Chris"]},
+       {id: 15, venueid: 29, date: "2015/10/28", maxpeople: 3, creator: "Andrew", people: ["Andrew", "Dave", "Steve"]},
+       {id: 16, venueid: 30, date: "2015/10/28", maxpeople: 3, creator: "Emily", people: ["Emily", "Hannah", "Angela"]},
+       {id: 17, venueid: 31, date: "2015/10/28", maxpeople: 3, creator: "Tony", people: ["Tony", "Alexia", "Sue"]},
+       {id: 18, venueid: 32, date: "2015/10/15", maxpeople: 4, creator: "Tim", people: ["Tim", "Amanda", "Dave"]},
+       {id: 19, venueid: 36, date: "2015/10/14", maxpeople: 4, creator: "Travis", people: ["Travis", "Chris", "Stacey"]},
+       {id: 20, venueid: 37, date: "2015/10/12", maxpeople: 2, creator: "Stacey", people: ["Stacey", "Fred"]}
+     ];
 
     // Promise-based API
     return {
@@ -36,6 +36,14 @@
       },
       getLunch : function(lunchId){
         return $q.when(_.find(lunches, {id: lunchId}));
+      },
+      createLunch : function(lunch){
+        var newLunch = {};
+        newLunch.id = _.last(lunches).id + 1;
+        newLunch.venueId = lunch.venue.id;
+        newLunch.date = lunch.date;
+        newLunch.creator = 'Ray';
+        lunches.unshift(newLunch);
       }
     };
   }

@@ -39,16 +39,16 @@
     <md-content class="location-container" >
       <md-input-container>
         <label>What's the address?</label>
-        <input ng-model="lunch.address" id="pac-input" placeholder="Search for address">
+        <input ng-model="lunch.venue.address" id="pac-input" placeholder="Search for address">
       </md-input-container>
-      <map center="-37.782, 175.352" zoom="15"></map>
+      <map center="{{ ctrl.lunch.venue.location }}" zoom="15"></map>
     </md-content>
 <br/>
     <md-checkbox ng-model="data.cb1" aria-label="Have a vehicle?">
       Check this if you can provide transport.
     </md-checkbox>
 
-    <md-button class="md-raised md-primary">
+    <md-button class="md-raised md-primary" ng-click="ctrl.createLunch()">
       <md-icon md-font-icon="fa-check" class="fa fa-lg"></md-icon>
       Create lunch
     </md-button>
