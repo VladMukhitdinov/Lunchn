@@ -103,6 +103,10 @@
                 $rootScope.$on('userSignedIn', function(){
                   $rootScope.signedIn = true;
                   $state.go('home')
+                });
+
+                $rootScope.$on('lunchAdded', function(){                  
+                  $rootScope.$broadcast('refreshLunches');
                 })
               });
 

@@ -15,7 +15,7 @@
     self.goToLunch = goToLunch;
     self.createLunch = createLunch;
 
-    $scope.$on('lunchAdded', load);
+    $scope.$on('refreshLunches', load);
 
     function createLunch($event){
       $mdDialog.show({

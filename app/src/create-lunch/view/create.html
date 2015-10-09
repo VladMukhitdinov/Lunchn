@@ -29,6 +29,9 @@
             md-floating-label="Where are we headed?">
           <md-item-template>
             <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+            <small style="float: right; color: orangered;" ng-show="item.name.indexOf('Jack') >= 0">
+              20% off today only.
+            </small>
           </md-item-template>
         </md-autocomplete>
     </md-input-container>

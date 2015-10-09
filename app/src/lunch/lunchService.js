@@ -40,7 +40,7 @@
       createLunch : function(lunch){
         var newLunch = {};
         newLunch.id = _.last(lunches).id + 1;
-        newLunch.venueId = lunch.venue.id;
+        newLunch.venueid = lunch.venue.id;
         newLunch.date = lunch.date.toISOString().slice(0, 10);;
         newLunch.creator = 'Ray';
         newLunch.maxpeople = 5;
